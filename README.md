@@ -95,7 +95,6 @@ Using the same input, you'll instead end up with a message flattened like below:
 }
 ```
 
-
 ### Filter
 
 You can set a configuration like below:
@@ -109,6 +108,31 @@ You can set a configuration like below:
 <match message>
   type stdout
 </match>
+```
+
+You can also add a base-level prefix to all keys:
+
+```
+<filter message>
+  type flatten_hash
+  separator _
+  flatten_array false
+  add_prefix "root"
+</filter>
+
+<match message>
+  type stdout
+</match>
+```
+
+Using the same input noted above, you'll instead end up with a message flattened like below:
+
+```js
+{
+  "root_message_today":"good day",
+  "root_message_tommorow_is_a_bad":"day",
+  "root_days":["2013/08/24","2013/08/25"]
+}
 ```
 
 ## Contributing

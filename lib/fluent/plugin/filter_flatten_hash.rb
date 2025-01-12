@@ -9,13 +9,14 @@ module Fluent::Plugin
 
     config_param :separator, :string, default: '.'
     config_param :flatten_array, :bool, default: true
+    config_param :add_prefix, :string, default: ''
 
     def configure(conf)
       super
     end
 
     def filter(tag, time, record)
-      flatten_record(record, [])
+      flatten_record(record, @add_prefix.empty? ? [] : [@add_prefix])
     end
   end
 end
